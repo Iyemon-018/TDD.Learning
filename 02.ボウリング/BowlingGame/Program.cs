@@ -9,4 +9,17 @@ namespace BowlingGame
             Console.WriteLine("Hello World!");
         }
     }
+
+    public sealed class Game
+    {
+        public void Roll(int pins)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Score()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
