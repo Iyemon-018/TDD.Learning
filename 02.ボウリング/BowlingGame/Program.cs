@@ -16,6 +16,7 @@ namespace BowlingGame
 
         public void Roll(int pins)
         {
+            _score += pins;
         }
 
         public int Score()
