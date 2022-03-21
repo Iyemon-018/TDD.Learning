@@ -20,6 +20,12 @@ namespace BowlingGame.Tests
             }
         }
 
+        private void RollSpare()
+        {
+            _g.Roll(6);
+            _g.Roll(4); // Spare
+        }
+
         [Fact]
         public void GutterGameTest()
         {
@@ -43,8 +49,7 @@ namespace BowlingGame.Tests
         [Fact]
         public void OneSpareTest()
         {
-            _g.Roll(5);
-            _g.Roll(5);     // Spare
+            RollSpare();
             _g.Roll(3);
             RollMany(17, 0);
 

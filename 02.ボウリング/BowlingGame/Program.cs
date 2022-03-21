@@ -2,6 +2,8 @@
 
 namespace BowlingGame
 {
+    using System.Linq;
+
     class Program
     {
         static void Main(string[] args)
@@ -12,25 +14,41 @@ namespace BowlingGame
 
     public sealed class Game
     {
-        // cf. https://www.slideshare.net/mdclement/bowling-game-kata-in-c-adapted/29
+        // cf. https://www.slideshare.net/mdclement/bowling-game-kata-in-c-adapted/41
         // ここまで完了した。
-        private int _score;
+        private readonly int[] _rolls = new int[21];
+
+        private int _currentRoll;
 
         public void Roll(int pins)
         {
-            // 現状の Roll メソッドは内部でスコア計算をしている。
-            // しかし、メソッド名からスコア計算を行うことを推測するのは難しい。
-            _score += pins;
+            _rolls[_currentRoll++] = pins;
         }
 
         public int Score()
         {
-            // 現状の Score メソッドは内部でスコア計算をしていない。
-            // しかし、メソッド名はスコア計算を行うことを明示している。
-            return _score;
+            var score = 0;
+            var roll  = 0;
+
+            for (int frame = 0; frame < 10; frame++)
+            {
+                if (IsSpare(roll))
+                {
+                    score += 10 + _rolls[roll + 2];
+                }
+                else
+                {
+                    score += _rolls[roll] + _rolls[roll + 1];
+                }
+                roll += 2;
+            }
+
+            return score;
         }
 
-        // つまりそれぞれのメソッド名とメソッドが実行していること（＝責務）がちぐはぐになっている。
-        // これは設計が間違っていることを表している。
+        private bool IsSpare(int roll)
+        {
+            return _rolls[roll] + _rolls[roll + 1] == 10;
+        }
     }
 }
