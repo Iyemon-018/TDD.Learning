@@ -71,5 +71,15 @@ namespace BowlingGame.Tests
 
             Assert.Equal(_g.Score(), 24);
         }
+
+        [Fact]
+        public void PerfectGameTest()
+        {
+            // cf. https://www.slideshare.net/mdclement/bowling-game-kata-in-c-adapted/47
+            // À‘•‚ÍŠ®—¹‚µ‚½B
+            RollMany(12, 10);
+
+            Assert.Equal(_g.Score(), 300);
+        }
     }
 }
