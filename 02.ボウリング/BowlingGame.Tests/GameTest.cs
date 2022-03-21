@@ -81,5 +81,45 @@ namespace BowlingGame.Tests
 
             Assert.Equal(_g.Score(), 300);
         }
+
+        [Fact]
+        public void ExampleGameTest()
+        {
+            // 追加テストケース
+            // ここのページのスコア計算例をテストする。
+            // cf. http://www.tokibow.com/tbchp/score.htm
+            _g.Roll(6);
+            _g.Roll(3);
+
+            _g.Roll(9);
+            _g.Roll(0);
+
+            _g.Roll(0);
+            _g.Roll(3);
+
+            _g.Roll(8);
+            _g.Roll(2);     // spare
+
+            _g.Roll(7);
+            _g.Roll(3);     // spare
+
+            _g.Roll(10);    // strike
+            //_g.Roll(0);
+
+            _g.Roll(9);
+            _g.Roll(1);     // spare
+
+            _g.Roll(8);
+            _g.Roll(0);
+
+            _g.Roll(10);    // strike
+            //_g.Roll(0);
+
+            _g.Roll(10);    // strike(double)
+            _g.Roll(6);
+            _g.Roll(4);     // spare
+
+            Assert.Equal(_g.Score(), 150);
+        }
     }
 }
