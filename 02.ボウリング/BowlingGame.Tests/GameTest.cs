@@ -39,5 +39,16 @@ namespace BowlingGame.Tests
 
             Assert.Equal(_g.Score(), 20);
         }
+
+        [Fact]
+        public void OneSpareTest()
+        {
+            _g.Roll(5);
+            _g.Roll(5);     // Spare
+            _g.Roll(3);
+            RollMany(17, 0);
+
+            Assert.Equal(_g.Score(), 16);
+        }
     }
 }
