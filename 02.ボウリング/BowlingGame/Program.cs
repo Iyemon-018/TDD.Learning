@@ -14,7 +14,7 @@ namespace BowlingGame
 
     public sealed class Game
     {
-        // cf. https://www.slideshare.net/mdclement/bowling-game-kata-in-c-adapted/41
+        // cf. https://www.slideshare.net/mdclement/bowling-game-kata-in-c-adapted/46
         // ここまで完了した。
 
         /// <summary>
@@ -39,17 +39,23 @@ namespace BowlingGame
 
             for (int frame = 0; frame < 10; frame++)
             {
-                if (IsSpare(roll))
+                if (IsStrike(roll))
+                {
+                    score += 10 + StrikeBonus(roll);
+                    roll++;
+                }
+                else if (IsSpare(roll))
                 {
                     // スペア発生時の得点数を計算する。
-                    score += 10 + _rolls[roll + 2];
+                    score += 10 + SpareBonus(roll);
+                    roll  += 2;
                 }
                 else
                 {
                     // いずれの条件にも一致しなかったので、ボーナス無しの得点数を計算する。
-                    score += _rolls[roll] + _rolls[roll + 1];
+                    score += SumOfBallsInFrame(roll);
+                    roll  += 2;
                 }
-                roll += 2;
             }
 
             return score;
@@ -58,6 +64,26 @@ namespace BowlingGame
         private bool IsSpare(int roll)
         {
             return _rolls[roll] + _rolls[roll + 1] == 10;
+        }
+
+        private bool IsStrike(int roll)
+        {
+            return _rolls[roll] == 10;
+        }
+
+        private int SumOfBallsInFrame(int roll)
+        {
+            return _rolls[roll] + _rolls[roll + 1];
+        }
+
+        private int SpareBonus(int roll)
+        {
+            return _rolls[roll + 2];
+        }
+
+        private int StrikeBonus(int roll)
+        {
+            return _rolls[roll + 1] + _rolls[roll + 2];
         }
     }
 }

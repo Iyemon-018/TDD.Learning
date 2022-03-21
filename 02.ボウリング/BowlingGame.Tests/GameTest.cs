@@ -26,6 +26,11 @@ namespace BowlingGame.Tests
             _g.Roll(4); // Spare
         }
 
+        private void RollStrike()
+        {
+            _g.Roll(10); // strike
+        }
+
         [Fact]
         public void GutterGameTest()
         {
@@ -54,6 +59,17 @@ namespace BowlingGame.Tests
             RollMany(17, 0);
 
             Assert.Equal(_g.Score(), 16);
+        }
+
+        [Fact]
+        public void OneStrikeTest()
+        {
+            RollStrike();
+            _g.Roll(3);
+            _g.Roll(4);
+            RollMany(16, 0);
+
+            Assert.Equal(_g.Score(), 24);
         }
     }
 }
