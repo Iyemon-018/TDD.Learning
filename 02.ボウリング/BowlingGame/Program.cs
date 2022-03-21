@@ -12,14 +12,15 @@ namespace BowlingGame
 
     public sealed class Game
     {
+        private int _score;
+
         public void Roll(int pins)
         {
-            throw new NotImplementedException();
         }
 
         public int Score()
         {
-            throw new NotImplementedException();
+            return _score;
         }
     }
 }
